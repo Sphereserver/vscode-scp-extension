@@ -1,0 +1,26 @@
+{
+  "name": "scp-spherex",
+  "displayName": "SphereScript for SphereServer-X",
+  "description": "Syntax highlighting for SphereServer-X script files",
+  "version": "1.0.1",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "scp",
+      "aliases": ["SphereScript", "scp"],
+      "extensions": [".scp"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "scp",
+      "scopeName": "source.scp",
+      "path": "./syntaxes/scp.tmLanguage.json"
+    }]
+  }
+}
