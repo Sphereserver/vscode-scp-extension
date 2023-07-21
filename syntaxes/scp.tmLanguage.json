@@ -1,6 +1,8 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "scp",
+	"scopeName": "source.scp",
+	"fileTypes": ["scp"],
 	"patterns": [
 		{
 			"include": "#comment"
@@ -234,6 +236,14 @@
 			"name": "entity.name.function.builtin.scp",
 			"match": "(?i)\\b(LOG)\\b"
 		},
+		"cobjbase-flags": {
+			"name": "entity.name.flags.cchar.scp",
+			"match": "(?i)\\b(statf_invul|statf_dead|statf_freeze|statf_invisible|statf_sleeping|statf_war|statf_reactive|statf_poisoned|statf_nightsight|statf_reflection|statf_polymorph|statf_incognito|statf_spiritspeak|statf_insubstantial|statf_emoteaction|statf_commcrystal|statf_hasshield|statf_archercanmove|statf_stone|statf_hovering|statf_fly|statf_hallucinating|statf_hidden|statf_indoors|statf_criminal|statf_conjured|statf_pet|statf_spawned|statf_saveparity|statf_ridden|statf_onhorse)\\b"
+		},
+		"cobjbase-spellflags": {
+			"name": "entity.name.spellflags.cchar.scp",
+			"match": "(?i)\\b(spellflag_dir_anim|spellflag_targ_item|spellflag_targ_char|spellflag_targ_obj|spellflag_targ_xyz|spellflag_harm|spellflag_fx_bolt|spellflag_fx_targ|spellflag_field|spellflag_summon|spellflag_good|spellflag_resist|spellflag_targ_noself|spellflag_freezeoncast|spellflag_disabled|spellflag_scripted|spellflag_playeronly|spellflag_nounparalyze|spellflag_no_castanim|spellflag_targ_no_player|spellflag_targ_no_npc|spellflag_noprecast|spellflag_nofreezeoncast|spellflag_area|spellflag_poly|spellflag_targ_dead|spellflag_damage|spellflag_bless|spellflag_curse|spellflag_heal|spellflag_tick)\\b"
+		},
 		"cobjbase-functions": {
 			"name": "entity.name.function.cobjbase.scp",
 			"match": "(?i)\\b(ADDCLILOC|BASEPROPLIST|BASETAGLIST|CLICK|CLILOCLIST|DAMAGE|DCLICK|DIALOG|DIALOGCLOSE|EDIT|EFFECT|EFFECTLOCATION|EMOTE|FIX|FLIP|FULLTRIGGER|GOAWAKE|GOSLEEP|INFO|INPDLG|MENU|MESSAGE|MESSAGEUA|MOVE|MOVENEAR|MOVETO|MSG|NUDGEDOWN|NUDGEUP|P|PROMPTCONSOLE|PROMPTCONSOLEU|PROPLIST|REMOVE|REMOVECLILOC|REMOVEFROMVIEW|REPLACECLILOC|RESENDTOOLTIP|SAY|SAYU|SAYUA|SDIALOG|SPELLEFFECT|TAGLIST|TARGET|TIMERF|TIMERFMS|TRIGGER|UID|UPDATE|UPDATEX|USEITEM|Z)\\b"
@@ -342,6 +352,5 @@
 			"name": "support.variable.property.cstonemember.scp",
 			"match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
 		}
-	},
-	"scopeName": "source.scp"
+	}
 }
