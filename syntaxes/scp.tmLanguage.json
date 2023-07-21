@@ -1,7 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "scp",
-	"scopeName": "source.scp",
 	"fileTypes": ["scp"],
 	"patterns": [
 		{
@@ -358,5 +357,6 @@
 			"name": "support.variable.property.cstonemember.scp",
 			"match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
 		}
-	}
+	},
+	"scopeName": "source.scp"
 }
