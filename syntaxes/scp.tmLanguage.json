@@ -206,9 +206,6 @@
 					"include": "#cobjbase-functions"
 				},
 				{
-					"include": "#cobjbase-spellflags"
-				},
-				{
 					"include": "#cchar-functions"
 				},
 				{
@@ -234,6 +231,9 @@
 				},
 				{
 					"include": "#csfileobj-functions"
+				},
+				{
+					"include": "#cobjbase-spellflags"
 				}
 			]
 		},
