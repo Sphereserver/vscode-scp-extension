@@ -4,6 +4,11 @@
   "description": "Syntax highlighting for SphereServer-X script files",
   "version": "1.0.1",
   "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sphereserver/vscode-scp-extension.git"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -11,16 +16,25 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "scp",
-      "aliases": ["SphereScript", "scp"],
-      "extensions": [".scp"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "scp",
-      "scopeName": "source.scp",
-      "path": "./syntaxes/scp.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "scp",
+        "aliases": [
+          "SphereScript",
+          "scp"
+        ],
+        "extensions": [
+          ".scp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "scp",
+        "scopeName": "source.scp",
+        "path": "./syntaxes/scp.tmLanguage.json"
+      }
+    ]
   }
 }
