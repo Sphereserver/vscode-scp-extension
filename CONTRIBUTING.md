@@ -15,6 +15,9 @@
   * <https://macromates.com/manual/en/language_grammars>
   * <https://macromates.com/manual/en/regular_expressions>
   * <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet>
+* Development notes for `scp.tmLanguage.json`:
+  * The innermost TextMate scope (`name` field) determines the syntax highlight color.
+  * Parent scopes are used to better define the meaning and purpose of the grammar rule, since we might be forced to use unfitting common scopes in order to have the desired colors, with compatibility with existing themes.
 
 ## Get up and running straight away
 
