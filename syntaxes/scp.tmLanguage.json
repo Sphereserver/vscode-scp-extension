@@ -38,6 +38,9 @@
 		},
 		{
 			"include": "#expressions"
+		},
+		{
+			"include": "mdb-database-call"
 		}
 	],
 	"repository": {
@@ -292,6 +295,9 @@
 				},
 				{
 					"include": "#cobjbase-functions"
+				},
+				{
+					"include": "#mdb-functions"
 				}
 			]
 		},
@@ -314,6 +320,18 @@
 				},
 				{
 					"include": "#cchar-constants-statflags"
+				},
+				{
+					"include": "#cregion-constants-regionflags"
+				},
+				{
+					"include": "#cobjbase-constants-attr"
+				},
+				{
+					"include": "#cchar-constants-canflags"
+				},
+				{
+					"include": "#cobjbase-constants-damflags"
 				}
 			]
 		},
@@ -324,6 +342,22 @@
 					"include": "#flags-builtin"
 				}
 			]
+		},
+		"cobjbase-constants-damflags": {
+			"name": "constant.numeric.flag.damflags.cobjbase.scp",
+			"match": "(?i)\\b(dam_god|dam_physical|dam_magic|dam_poison|dam_fire|dam_energy|dam_general|dam_acidic|dam_cold|dam_slash|dam_pierce|dam_nodisturb|dam_noreveal|dam_nounparalyze|dam_fixed|dam_breath|dam_thrown|dam_reactive)\\b"
+		},
+		"cchar-constants-canflags": {
+			"name": "constant.numeric.flags.canflags.cchar.scp",
+			"match": "(?i)\\b(mt_male|mt_ghost|mt_swim|mt_walk|mt_passwalls|mt_fly|mt_fire_immune|mt_noindoors|mt_hover|mt_equip|mt_usehands|mt_mount|mt_female|mt_nonhum|mt_run|mt_nodclicklos|mt_nodclickdist|mt_nonmover|mt_noblockheight|mt_statue|mt_nonselectable)\\b"
+		},
+		"cobjbase-constants-attr": {
+			"name": "constant.numeric.flag.attr.cobjbase.scp",
+			"match": "(?i)\\b(attr_identified|attr_decay|attr_newbie|attr_move_always|attr_move_never|attr_magic|attr_owned|attr_invis|attr_cursed|attr_cursed2|attr_blessed|attr_blessed2|attr_forsale|attr_stolen|attr_can_decay|attr_static|attr_exceptional|attr_enchanted|attr_imbued|attr_questitem|attr_insured|attr_nodrop|attr_notrade|attr_artifact|attr_lockeddown|attr_secure|attr_reforged|attr_opened|attr_shardbound|attr_accountbound|attr_characterbound|attr_canuse_paralyzed)\\b"
+		},
+		"cregion-constants-regionflags": {
+			"name": "constant.numeric.flag.regionflags.cregion.scp",
+			"match": "(?i)\\b(region_antimagic_all|region_antimagic_recall_in|region_antimagic_recall_out|region_antimagic_gate|region_antimagic_gate|region_antimagic_teleport|region_antimagic_damage|region_flag_ship|region_flag_nobuilding|region_flag_announce|region_flag_insta_logout|region_flag_underground|region_flag_nodecay|region_flag_safe|region_flag_guarded|region_no_pvp|region_flag_arena|region_flag_nomining|region_flag_walk_noblockheight|region_flag_inherit_parent_events|region_flag_inherit_parent_flags|region_flag_inherit_parent_tags)\\b"
 		},
 		"cobjbase-constants-spellflags": {
 			"name": "constant.numeric.flag.spellflag.cobjbase.scp",
@@ -452,6 +486,14 @@
 		"cstonemember-props": {
 			"name": "support.variable.property.cstonemember.scp",
 			"match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
+		},
+		"mdb-database": {
+			"name": "support.variable.function.database.scp",
+			"match": "(?i)\\b(CONNECTED|QUERY|AQUERY|EXECUTE|AEXECUTE|NUMROWS)\\b"
+		},
+		"mdb-database-call": {
+			"name": "support.variable.call.database.scp",
+			"match": "(?i)\\b(DB|ROW|CONNECT)\\b"
 		}
 	},
 	"scopeName": "source.scp"
