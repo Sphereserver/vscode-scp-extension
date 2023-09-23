@@ -1,458 +1,458 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "scp",
-	"fileTypes": ["scp"],
-	"patterns": [
-		{
-			"include": "#comment"
-		},
-		{
-			"include": "#sections"
-		},
-		{
-			"include": "#string"
-		},
-		{
-			"include": "#statements-intrinsic"
-		},
-		{
-			"include": "#object"
-		},
-		{
-			"include": "#storage"
-		},
-		{
-			"include": "#identifier-reserved"
-		},
-		{
-			"include": "#named-constants"
-		},
-		{
-			"include": "#functions"
-		},
-		{
-			"include": "#triggers"
-		},
-		{
-			"include": "#properties"
-		},
-		{
-			"include": "#expressions"
-		}
-	],
-	"repository": {
-		"string": {
-			"name": "string.quoted.double.scp",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.scp",
-					"match": "\\\\.*"
-				}
-			]
-		},
-		"identifier-reserved": {
-			"name": "entity.name.reserved.scp",
-			"patterns": [
-				{
-					"name": "support.variable.reserved.local.scp",
-					"match": "(?i)\\b(_for|_while)\\b"
-				},
-				{
-					"name": "support.variable.reserved.tag.scp",
-					"match": "(?i)\\b(barding.diff)\\b"
-				}
-			]
-		},
-		"comment-block": {
-			"begin": "(?i)^\\s*\\[COMMENT.*\\]",
-			"end": "\\^\\s*[.*\\]",
-			"name": "comment.block.documentation.scp"
-		},
-		"comment-multiline": {
-			"begin": "/\\*",
-			"end": "\\*/",
-			"name": "comment.block.multiline.scp"
-		},
-		"comment-line": {
-			"match": "(//).*$\\n?",
-			"name": "comment.line.scp"
-		},
-		"comment": {
-			"name": "comment.scp",
-			"patterns": [
-				{
-					"include": "#comment-block"
-				},
-				{
-					"include": "#comment-multiline"
-				},
-				{
-					"include": "#comment-line"
-				}
-			]
-		},
-		"sections": {
-			"name": "entity.name.section.scp",
-			"patterns": [
-				{
-					"name": "support.class.section.header.scp",
-			"begin": "(^\\s*\\[)",
-			"end": "(\\])",
-			"patterns": [
-				{
-					"name": "support.class.section.definition.scp",
-					"match": "(?i)(areadef|chardef|defnames|dialog|eof|events|function|itemdef|menu|multidef|regionresource|regiontype|roomdef|speech|template|typedef)"
-				}
-			]
-				}
-			]
-		},
-		"operator": {
-			"name": "keyword.operator.scp",
-			"match": "(~|<|>|<=|>=|\\|&|&&|<<|>>|!|!=|=|==|\\?|\\^|@|%|\/|\\*|-|\\+)"
-		},
-		"numeric-literal": {
-			"match": "\\b(\\s*(?<=[^$])((0[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?)))\\b",
-			"name": "constant.numeric.literal.scp"
-		},
-		"expressions": {
-			"name": "expression.scp",
-			"patterns": [
-				{
-					"include": "#operator"
-				},
-				{
-					"include": "#numeric-literal"
-				}
-			]
-		},
-		"conditional-statement": {
-			"name": "keyword.control.conditional.scp",
-			"match": "(?i)\\b(if|else|elif|elseif|endif)\\b"
-		},
-		"ctrl-flow-statement": {
-			"name": "keyword.control.flow.scp",
-			"match": "(?i)\\b(begin|break|continue|doswitch|end|enddo|endfor|endwhile|for|forchars|forcharlayer|forcharmemorytype|forclients|forcont|forcontid|forconttype|forinstances|foritems|forobjs|forplayers|return|switch|while)\\b"
-		},
-		"parser-modifier": {
-			"name": "keyword.control.parser.scp",
-			"match": "(?i)\\b(fullinterp|try|tryp|trysrc|trysrv)\\b"
-		},
-		"context-changers": {
-			"name": "keyboard.control.context.scp",
-			"patterns": [
-				{
-					"name": "keyword.control.directive.define.context.scp",
-					"match": "(?i)\\b(call|fulltrigger|on|trigger)\\b"
-				}
-			]
-		},
-		"statements-intrinsic": {
-			"name": "statements.intrinsic.scp",
-			"patterns": [
-				{
-					"include": "#conditional-statement"
-				},
-				{
-					"include": "#ctrl-flow-statement"
-				},
-				{
-					"include": "#parser-modifier"
-				},
-				{
-					"include": "#context-changers"
-				}
-			]
-		},
-		"trigger-builtin": {
-			"name": "entity.name.function.preprocessor.scp",
-			"match": "(?i)@\\b(ABORT|ADDMULTI|ADDREDCANDLE|ADDOBJ|ADDWHITECANDLE|AFTERCLICK|ATTACK|BUY|CALLGUARDS|CARVECORPSE|CHARATTACK|CHARCLICK|CHARCLIENTTOOLTIP|CHARCLIENTTOOLTIP_AFTERDEFAULT|CHARDCLICK|CHARSHOVE|CHARTRADEACCEPTED|CLICK|CLIENTTOOLTIP|CLIENTTOOLTIP_AFTERDEFAULT|CLIPERIODIC|COMBATADD|COMBATDELETE|COMBATEND|COMBATSTART|CONTEXTMENUREQUEST|CONTEXTMENUSELECT|CREATE|CREATELOOT|CRIMINAL|DAMAGE|DCLICK|DEATH|DEATHCORPSE|DELMULTI|DELOBJ|DESTROY|DISMOUNT|DROPON_CHAR|DROPON_GROUND|DROPON_ITEM|DROPON_SELF|DROPON_TRADE|DYE|EAT|EFFECT|EFFECTADD|EFFECTREMOVE|EFFECTTICK|ENTER|ENVIRONCHANGE|EQUIP|EQUIPTEST|EXIT|EXPCHANGE|EXPLEVELCHANGE|FAIL|FALLING|FAMECHANGE|FOLLOWERSUPDATE|GAIN|GETHIT|HIT|HITCHECK|HITIGNORE|HITMISS|HITPARRY|HITTRY|HOUSEDESIGNBEGIN|HOUSEDESIGNCOMMIT|HOUSEDESIGNCOMMITITEM|HOUSEDESIGNEXIT|ITEMAFTERCLICK|ITEMBUY|ITEMCARVECORPSE|ITEMCLICK|ITEMCLIENTTOOLTIP|ITEMCLIENTTOOLTIP_AFTERDEFAULT|ITEMCONTEXTMENUREQUEST|ITEMCONTEXTMENUSELECT|ITEMCREATE|ITEMDAMAGE|ITEMDCLICK|ITEMDESTROY|ITEMDROPON_CHAR|ITEMDROPON_GROUND|ITEMDROPON_ITEM|ITEMDROPON_SELF|ITEMDROPON_TRADE|ITEMEQUIP|ITEMEQUIPTEST|ITEMFIRE|ITEMMEMORYEQUIP|ITEMPICKUP_GROUND|ITEMPICKUP_PACK|ITEMPICKUP_SELF|ITEMPICKUP_STACK|ITEMSELL|ITEMSMELT|ITEMSPELL|ITEMSTEP|ITEMTARGON_CANCEL|ITEMTARGON_CHAR|ITEMTARGON_GROUND|ITEMTARGON_ITEM|ITEMTIMER|ITEMTOOLTIP|ITEMUNEQUIP|JAILED|KARMACHANGE|KILL|MEMORYEQUIP|LOAD|LOGIN|LOGOUT|MOUNT|MURDERDECAY|MURDERMARK|NOTOSEND|NPCACCEPTITEM|NPCACTCAST|NPCACTFIGHT|NPCACTFOLLOW|NPCACTION|NPCACTWANDER|NPCHEARGREETING|NPCHEARUNKNOWN|NPCLOOKATCHAR|NPCLOOKATITEM|NPCLOSTTELEPORT|NPCREFUSEITEM|NPCRESTOCK|NPCSEENEWPLAYER|NPCSEEWANTITEM|NPCSPECIALACTION|PARTYDISBAND|PARTYINVITE|PARTYLEAVE|PARTYREMOVE|PAYGOLD|PERSONALSPACE|PETDESERT|PICKUP_GROUND|PICKUP_PACK|PICKUP_SELF|PICKUP_STACK|PRESPAWN|PRESTART|PROFILE|RECEIVEITEM|REDEED|REGENSTAT|REGIONENTER|REGIONLEAVE|REGIONRESOURCEFOUND|REGIONRESOURCEGATHER|REGPERIODIC|RENAME|RESOURCEFOUND|RESOURCEGATHER|RESOURCETEST|RESURRECT|SEECRIME|SEEHIDDEN|SEESNOOP|SELECT|SELL|SENDPAPERDOLL|SHIP_MOVE|SHIP_STOP|SHIP_TURN|SKILLABORT|SKILLCHANGE|SKILLFAIL|SKILLGAIN|SKILLMAKEITEM|SKILLMENU|SKILLPRESTART|SKILLSELECT|SKILLSTART|SKILLSTROKE|SKILLSUCCESS|SKILLTARGETCANCEL|SKILLUSEQUICK|SKILLWAIT|SMELT|SPAWN|SPELLBOOK|SPELLCAST|SPELLEFFECT|SPELLEFFECTADD|SPELLEFFECTREMOVE|SPELLEFFECTTICK|SPELLFAIL|SPELLINTERRUPT|SPELLSELECT|SPELLSUCCESS|SPELLTARGETCANCEL|START|STATCHANGE|STEP|STEPSTEALTH|STROKE|SUCCESS|TARGETCANCEL|TARGON_CANCEL|TARGON_CHAR|TARGON_GROUND|TARGON_ITEM|TIMER|TOGGLEFLYING|TOOLTIP|TRADEACCEPTED|TRADECLOSE|TRADECREATE|UNEQUIP|USEQUICK|USERBUGREPORT|USERCHATBUTTON|USEREXTCMD|USEREXWALKLIMIT|USERGUILDBUTTON|USERKRTOOLBAR|USERMAILBAG|USERQUESTARROWCLICK|USERQUESTBUTTON|USERSKILLS|USERSPECIALMOVE|USERSTATS|USERULTIMASTOREBUTTON|USERVIRTUE|USERVIRTUEINVOKE|USERWARMODE|WAIT)\\b"
-		},
-		"triggers": {
-			"name": "entity.name.section.trigger.scp",
-			"patterns": [
-				{
-						"name": "entity.name.section.trigger.builtin",
-						"patterns": [
-							{
-								"include": "#trigger-builtin"
-							}
-						]
-				}
-			]
-		},
-		"storage": {
-			"name": "storage.type.scp",
-			"match": "(?i)\\b(d?def0?|defmsg|d?tag0?|d?ctag0?|d?var0?|d?local|float|d?resdef0?|ARGO|ARGS|ARGV|ARG|ARGCHK|ARGCHKID|ARGTXT|d?ARGN[1-3])\\b"
-		},
-		"object": {
-			"name": "entity.name.class.scp",
-			"match": "(?i)\\b(account|act|argo|chardef|client|comp|cont|db|file|findcont|findid|findlayer|findtype|finduid|gmpage|guild|itemdef|lastnew|link|map|member|multi|new|obj|owner|party|ref[1-255]|region|sector|sectors|serv|skill|spell|src|targ|topobj|typedef|town)\\b"
-		},
-		"properties": {
-			"name": "support.variable.property.scp",
-			"patterns": [
-				{
-					"include": "#cobjbase-props"
-				},
-				{
-					"include": "#cchar-props-skills"
-				},
-				{
-					"include": "#cchar-props"
-				},
-				{
-					"include": "#props-cc-char"
-				},
-				{
-					"include": "#ccharbase-props"
-				},
-				{
-					"include": "#ccharplayer-props"
-				},
-				{
-					"include": "#citem-props"
-				},
-				{
-					"include": "#props-cc-itemchar"
-				},
-				{
-					"include": "#props-cc-item"
-				},
-				{
-					"include": "#props-cc-itemequippable"
-				},
-				{
-					"include": "#props-cc-itemweapon"
-				},
-				{
-					"include": "#props-cc-itemweaponranged"
-				},
-				{
-					"include": "#citembase-props"
-				},
-				{
-					"include": "#citemstone-props"
-				},
-				{
-					"include": "#cclient-props"
-				},
-				{
-					"include": "#cparty-props"
-				},
-				{
-					"include": "#csfileobj-props"
-				},
-				{
-					"include": "#cscriptobj-props"
-				}
-			]
-		},
-		"function-intrinsic": {
-			"name": "entity.name.function.intrinsic.scp",
-			"match": "(?i)\\b(a|asc|b|d|eval|explode|f|floatval|hval|isempty|isnum|isnumber|isvalid|newitem|newnpc|qval|r|rand|s|strarg|strcmp|strcmpi|streat|streverse|strlen|strmatch|strmid|strpos|strregex|strrev|strsub|strtoupper|strtrim|w)\\b"
-		},
-		"function-builtin": {
-			"name": "entity.name.function.builtin.scp",
-			"patterns": [
-				{
-					"include": "#clog-functions"
-				},
-				{
-					"include": "#cobjbase-functions"
-				},
-				{
-					"include": "#cchar-functions"
-				},
-				{
-					"include": "#ccharplayer-functions"
-				},
-				{
-					"include": "#citem-functions"
-				},
-				{
-					"include": "#citemstone-functions"
-				},
-				{
-					"include": "#cclient-functions"
-				},
-				{
-					"include": "#cparty-functions"
-				},
-				{
-					"include": "#cscriptobj-functions"
-				},
-				{
-					"include": "#csector-functions"
-				},
-				{
-					"include": "#csfileobj-functions"
-				},
-				{
-					"include": "#cobjbase-functions"
-				}
-			]
-		},
-		"functions": {
-			"name": "entity.name.function.scp",
-			"patterns": [
-				{
-					"include": "#function-intrinsic"
-				},
-				{
-					"include": "#function-builtin"
-				}
-			]
-		},
-		"flags-builtin": {
-			"name": "entity.name.tag.named_constant.flag.builtin.scp",
-			"patterns": [
-				{
-					"include": "#cobjbase-constants-spellflags"
-				},
-				{
-					"include": "#cchar-constants-statflags"
-				}
-			]
-		},
-		"named-constants": {
-			"name": "entity.name.tag.named_constant.scp",
-			"patterns": [
-				{
-					"include": "#flags-builtin"
-				}
-			]
-		},
-		"cobjbase-constants-spellflags": {
-			"name": "constant.numeric.flag.spellflag.cobjbase.scp",
-			"match": "(?i)\\b(spellflag_dir_anim|spellflag_targ_item|spellflag_targ_char|spellflag_targ_obj|spellflag_targ_xyz|spellflag_harm|spellflag_fx_bolt|spellflag_fx_targ|spellflag_field|spellflag_summon|spellflag_good|spellflag_resist|spellflag_targ_noself|spellflag_freezeoncast|spellflag_disabled|spellflag_scripted|spellflag_playeronly|spellflag_nounparalyze|spellflag_no_castanim|spellflag_targ_no_player|spellflag_targ_no_npc|spellflag_noprecast|spellflag_nofreezeoncast|spellflag_area|spellflag_poly|spellflag_targ_dead|spellflag_damage|spellflag_bless|spellflag_curse|spellflag_heal|spellflag_tick)\\b"
-		},
-		"cobjbase-functions": {
-			"name": "entity.name.function.cobjbase.scp",
-			"match": "(?i)\\b(ADDCLILOC|BASEPROPLIST|BASETAGLIST|CLICK|CLILOCLIST|DAMAGE|DCLICK|DIALOG|DIALOGCLOSE|EDIT|EFFECT|EFFECTLOCATION|EMOTE|FIX|FLIP|GOAWAKE|GOSLEEP|INFO|INPDLG|MENU|MESSAGE|MESSAGEUA|MOVE|MOVENEAR|MOVETO|MSG|NUDGEDOWN|NUDGEUP|P|PROMPTCONSOLE|PROMPTCONSOLEU|PROPLIST|REMOVE|REMOVECLILOC|REMOVEFROMVIEW|REPLACECLILOC|RESENDTOOLTIP|SAY|SAYU|SAYUA|SDIALOG|SPELLEFFECT|TAGLIST|TARGET|TIMERF|TIMERFMS|UID|UPDATE|UPDATEX|USEITEM|Z)\\b"
-		},
-		"cobjbase-props": {
-			"name": "support.variable.property.cobjbase.scp",
-			"match": "(?i)\\b(ABILITYPRIMARY|ABILITYSECONDARY|ARMOR|CAN|CANMASK|CANSEE|CANSEELOS|CANSEELOSFLAG|CLILOC|CLILOCCOUNT|COLOR|COMPLEXITY|CTAGCOUNT|DAM|DEFNAME|DIALOGLIST|DISTANCE|EVENTS|FACING|HASCOMPONENTPROPS|ISARMOR|ISCHAR|ISCONT|ISDIALOGOPEN|ISEVENT|ISITEM|ISNEARTYPE|ISNEARTYPETOP|ISPLAYER|ISSLEEPING|ISTEVENT|ISTIMERF|ISWEAPON|MAP|MODAC|MODAR|MODMAXWEIGHT|NAME|NAMELOC|ONAME|P|PROPSAT|PROPSCOUNT|RECIPEALCHEMY|RECIPEBLACKSMITH|RECIPEBOWCRAFT|RECIPECARPENTRY|RECIPECARTOPGRAHY|RECIPECOOKING|RECIPEGLASSBLOWING|RECIPEINSCRIPTION|RECIPEMASONRY|RECIPETAILORING|RECIPETINKERING|RESDISPDNHUE|SERIAL|SEXTANTP|SLAYER|SLAYERLESSER|SLAYERMISC|SLAYERSUPER|SOUND|SPAWNITEM|SPEED|TAG|TAG0|TAGAT|TAGCOUNT|TEVENTS|TEXTF|TIMER|TIMERD|TIMERMS|TIMESTAMP|TOPOBJ|UID|VERSION|WEIGHT|Z)\\b"
-		},
-		"ccharbase-props": {
-			"name": "support.variable.property.ccharbase.scp",
-			"match": "(?i)\\b(ACTPRI|BONDED|FOLLOWERSLOTS|HOMEDIST|ICON|ITEM|MOVERATE|NEED|NEEDNAME|NPC|SPEECH|SPELLADD|THROWDAM|THROWDAMTYPE|THROWOBJ|THROWRANGE|VENDCAP|VENDGOLD)\\b"
-		},
-		"cchar-functions": {
-			"name": "entity.name.function.cchar.scp",
-			"match": "(?i)\\b(AFK|ALLSKILLS|ANIM|ATTACK|BANK|BARK|BOUNCE|BOW|CONSUME|CONTROL|CRIMINAL|CURE|DESTROY|DISCONNECT|DROP|DUPE|EQUIP|EQUIPARMOR|EQUIPHALO|EQUIPWEAPON|FACE|FIXWEIGHT|FORGIVE|GO|GOCHAR|GOCHARID|GOCLI|GOITEMID|GONAME|GOSOCK|GOTYPE|GOUID|HEAR|HUNGRY|INVIS|INVUL|JAIL|KILL|MAKEITEM|MOUNT|NEWBIESKILL|NEWGOLD|NEWLOOT|NOTOCLEAR|NOTOUPDATE|OWNER|PACK|POISON|POLY|PRIVSET|REMOVE|RESURRECT|REVEAL|SALUTE|SKILL|SKILLGAIN|SLEEP|SMSG|SMSGL|SMSGLEX|SMSGU|SUICIDE|SUMMONCAGE|SUMMONTO|SYSMESSAGE|SYSMESSAGEF|SYSMESSAGELOC|SYSMESSAGELOCEX|SYSMESSAGEUA|TARGETCLOSE|UNDERWEAR|UNEQUIP|WAKE|WHERE)\\b"
-		},
-		"cchar-props-skills": {
-			"name": "support.variable.skill.cchar.scp",
-			"match": "(?i)\\b(Alchemy|Archery|Anatomy|AnimalLore|ArmsLore|Begging|Blacksmithing|Bowcraft|Bushido|Camping|Carpentry|Cartography|Chivalry|Cooking|DetectingHidden|Enticement|EvaluatingIntel|Fencing|Fishing|Focus|Forensics|Healing|Herding|Hiding|Imbuing|Inscription|ItemId|LockPicking|Lumberjacking|Macefighting|Magery|MagicResistance|Musicianship|Meditation|Mining|Mysticism|Necromancy|Ninjitsu|Parrying|Peacemaking|Poisoning|Provocation|RemoveTrap|Snooping|Spellweaving|SpiritSpeak|Stealing|Stealth|Swordsmanship|Tactics|Tailoring|Taming|TasteId|Throwing|Tinkering|Tracking|Veterinary|Wrestling)\\b"
-		},
-		"cchar-constants-statflags": {
-			"name": "constant.numeric.flag.statflag.cchar.scp",
-			"match": "(?i)\\b(statf_invul|statf_dead|statf_freeze|statf_invisible|statf_sleeping|statf_war|statf_reactive|statf_poisoned|statf_nightsight|statf_reflection|statf_polymorph|statf_incognito|statf_spiritspeak|statf_insubstantial|statf_emoteaction|statf_commcrystal|statf_hasshield|statf_archercanmove|statf_stone|statf_hovering|statf_fly|statf_hallucinating|statf_hidden|statf_indoors|statf_criminal|statf_conjured|statf_pet|statf_spawned|statf_saveparity|statf_ridden|statf_onhorse)\\b"
-		},
-		"cchar-props": {
-			"name": "support.variable.property.cchar.scp",
-			"match": "(?i)\\b(AC|ACCOUNT|ACT|ACTARG[1-3]|ACTDIFF|ACTION(?:EFFECT)?|ACTP|ACTPRV|AGE|AR|ATTACKER|AVERSIONS|BANKBALANCE|BLOODCOLOR|BODY|BREATH|CAN(?:CAST|MAKE(?:SKILL)?)|CANMOVE|CREATE|CURFOLLOWER|DAMADJUSTED|DESIRES|DEX|DIR|DISMOUNT|DISPIDDEC|EMOTE(?:ACT|COLOROVERRIDE)|EXP|FAME|FIGHTRANGE|FLAGS|FONT|FOOD|GOLD|GUILDABBREV|HEIGHT|HITPOINTS|HITS|HOME|ID|INT|ISGM|ISINPARTY|ISMYPET|ISONLINE|ISSTUCK|ISVENDOR|ISVERTICALSPACE|KARMA|LEVEL|MANA|MAXFOLLOWER|MAXFOOD|MAXHITS|MAXMANA|MAXSTAM|MAXWEIGHT|MEMORY|MOD(?:DEX|INT|MAXHITS|MAXMANA|MAXSTAM|STR)|MOUNT|MOVE|NAME|NOTO(?:GETFLAG|SAVE)|NPC|O(?:BODY|DEX|FAME|FOOD|INT|KARMA|MAXHITS|MAXMANA|MAXSTAM|SKIN|STR)|P|RANGE(?:[HL])?|REGEN(?:FOOD[D]?|HITS[D]?|MANA[D]?|STAM[D]?|VALFOOD|VALHITS|VALMANA|VALSTAM)|SEX|SKILL(?:ADJUSTED|BEST|CHECK|TEST|TOTAL|USEQUICK)|SPEECHCOLOROVERRIDE|SPELLTIMEOUT|STAM(?:INA)?|STATPERCENT|STEPSTEALTH|STONE|STR|SWING|TITHING|TITLE|TOWNABBREV|VIRTUALGOLD|VISUALRANGE)\\b"
-		},
-		"props-cc-char": {
-			"name": "support.variable.property.cc-char.scp",
-			"match": "(?i)\\b(COMBATBONUSPERCENT|COMBATBONUSSTAT|DAMCHAOS|DAMCOLD|DAMDIRECT|DAMENERGY|DAMFIRE|DAMPHYSICAL|DAMPOISON|DECREASEHITCHANCE|EATERCOLD|EATERDAM|EATERENERGY|EATERFIRE|EATERKINETIC|EATERPOISON|ENHANCEPOTIONS|FASTERCASTING|FASTERCASTRECOVERY|FOODTYPE|HITAREACOLD|HITAREAENERGY|HITAREAFIRE|HITAREAPHYSICAL|HITAREAPOISON|HITCURSE|HITDISPEL|HITFATIGUE|HITFIREBALL|HITHARM|HITLEECHLIFE|HITLEECHMANA|HITLEECHSTAM|HITLIGHTNING|HITLOWERATK|HITLOWERDEF|HITMAGICARROW|HITMANADRAIN|HITSPARKS|HITSPELL|HITSPELLSTR|HITSWARM|INCREASEDAM|INCREASEDEFCHANCE|INCREASEDEFCHANCEMAX|INCREASEGOLD|INCREASEHITCHANCE|INCREASEKARMALOSS|INCREASESPELLDAM|INCREASESWINGSPEED|LOWERAMMOCOST|LOWERMANACOST|LOWERREAGENTCOST|LUCK|NIGHTSIGHT|RAGEFOCUS|REACTIVEPARALYZE|REFLECTPHYSICALDAM|RESCOLD|RESCOLDMAX|RESENERGY|RESENERGYMAX|RESFIRE|RESFIREMAX|RESONANCECOLD|RESONANCEENERGY|RESONANCEFIRE|RESONANCEKINETIC|RESONANCEPOISON|RESPHYSICAL|RESPHYSICALMAX|RESPOISON|RESPOISONMAX|SOULCHARGE|SOULCHARGECOLD|SOULCHARGEENERGY|SOULCHARGEFIRE|SOULCHARGEKINETIC|SOULCHARGEPOISON|SPELLCHANNELING|SPELLCONSUMPTION|SPELLFOCUSING)\\b"
-		},
-		"ccharplayer-functions": {
-			"name": "entity.name.function.ccharplayer.scp",
-			"match": "(?i)\\b(KICK|PASSWORD|TARGETCLOSE)\\b"
-		},
-		"ccharplayer-props": {
-			"name": "support.variable.property.ccharplayer.scp",
-			"match": "(?i)\\b(ACCOUNT|ADDHOUSE|ADDSHIP|DEATHS|DELHOUSE|DELSHIP|DSPEECH|EMOTECOLOR|GETHOUSEPOS|GETSHIPPOS|HOUSEMULTICOUNT|HOUSES|ISDSPEECH|KILLS|KRTOOLBARSTATUS|LASTDISCONNECTED|LASTUSED|LIGHT|MAXHOUSES|MAXSHIPS|PFLAG|PROFILE|REFUSETRADES|SHIPMULTICOUNT|SHIPS|SKILLCLASS|SKILLLOCK|SPEECHCOLOR|SPEEDMODE|STATLOCK)\\b"
-		},
-		"citembase-props": {
-			"name": "support.variable.property.citembase.scp",
-			"match": "(?i)\\b(ALTERITEM|BONUSCRAFTING|BONUSCRAFTINGAMT|BONUSCRAFTINGEXCEP|BONUSCRAFTINGEXCEPAMT|BONUSSKILL1|BONUSSKILL1AMT|BONUSSKILL2|BONUSSKILL2AMT|BONUSSKILL3|BONUSSKILL3AMT|BONUSSKILL4|BONUSSKILL4AMT|BONUSSKILL5|BONUSSKILL5AMT|CANUSE|CHARGESCUR|CHARGESMAX|DISPID|DROPSOUND|DUPEITEM|DUPELIST|DURABILITY|DYE|ENCHANT|EQUIPSOUND|EXCEPTIONAL|EXPANSION|FLIP|ID|IMBUE|ISARMOR|ISWEAPON|ITEMSETAMTCUR|ITEMSETAMTMAX|ITEMSETCOLOR|ITEMSETNAME|LAYER|LIFESPAN|MAKERSMARK|MATERIAL|MAXAMOUNT|MULTICOUNT|NODROPTRADE|NPCKILLER|NPCKILLERAMT|NPCPROTECTION|NPCPROTECTIONAMT|OCOLOR|OWNEDBY|PICKUPSOUND|PILE|RARITY|RECHARGE|RECHARGEAMT|RECHARGERATE|RECYCLE|REFORGE|REMOVALTYPE|REPAIR|REPLICATE|REQSTR|RESDISPDNID|RESMAKE|RETAINCOLOR|RESOURCES|SELFREPAIR|SHIPSPEED|SKILL|SKILLMAKE|SPEED|SPEEDMODE|SUMMONING|TDATA1|TDATA2|TDATA3|TDATA4|TFLAGS|TWOHANDS|TYPE|USESCUR|USESMAX|VALUE|WEIGHT)\\b"
-		},
-		"citem-functions": {
-			"name": "entity.name.function.citem.scp",
-			"match": "(?i)\\b(BOUNCE|CONSUME|CONTCONSUME|DECAY|DESTROY|DROP|DUPE|EQUIP|REPAIR|SMELT|UNEQUIP|USE|USEDOOR)\\b"
-		},
-		"citem-props": {
-			"name": "support.variable.property.citem.scp",
-			"match": "(?i)\\b(AC|ADDCIRCLE|ADDSPELL|AMOUNT|AR|ATTR|BASEWEIGHT|BONUSCRAFTING|BONUSCRAFTINGAMT|BONUSCRAFTINGEXCEP|BONUSCRAFTINGEXCEPAMT|BONUSSKILL1|BONUSSKILL1AMT|BONUSSKILL2|BONUSSKILL2AMT|BONUSSKILL3|BONUSSKILL3AMT|BONUSSKILL4|BONUSSKILL4AMT|BONUSSKILL5|BONUSSKILL5AMT|CANUSE|CONT|CONTGRID|CONTP|CRAFTEDBY|DISPID|DISPIDDEC|DOORCLOSESOUND|DOOROPENID|DOOROPENSOUND|DROPSOUND|DUPEITEM|DURABILITY|DYE|EQUIPSOUND|FRUIT|HEIGHT|HITPOINTS|HITS|ID|ITEMSETAMTCUR|ITEMSETAMTMAX|ITEMSETCOLOR|ITEMSETNAME|LAYER|LIFESPAN|LINK|LUCK|MAKERSNAME|MATERIAL|MAXAMOUNT|MAXHITS|MORE|MORE1|MORE1H|MORE1L|MORE2|MORE2H|MORE2L|MOREM|MOREP|MOREX|MOREY|MOREZ|NODROP|NOTRADE|NPCKILLER|NPCKILLERAMT|NPCPROTECTION|NPCPROTECTIONAMT|OCOLOR|OWNEDBY|P|PICKUPSOUND|PORTCULISSOUND|QUESTITEM|RARITY|RECHARGE|RECHARGEAMT|RECHARGERATE|REMOVALTYPE|REPAIRPERCENT|SELFREPAIR|SPELLCOUNT|SUMMONING|TOPCONT|TYPE|USESCUR|USESMAX|WEIGHT)\\b"
-		},
-		"props-cc-itemchar": {
-			"name": "support.variable.property.citem-cc.scp",
-			"match": "(?i)\\b(WEIGHTREDUCTION)\\b"
-		},
-		"props-cc-item": {
-			"name": "support.variable.property.cc-item.scp",
-			"match": "(?i)\\b(LAVAINFUSED|SHIPWRECKITEM|UNLUCKY)\\b"
-		},
-		"props-cc-itemequippable": {
-			"name": "support.variable.property.props-cc-itemequippable.scp",
-			"match": "(?i)\\b(ALTERED|ANTIQUE|BONUSBERSERK|BONUSDEX|BONUSDURABILITY|BONUSHITSMAX|BONUSINT|BONUSMANAMAX|BONUSSTAMMAX|BONUSSTR|BRITTLE|CASTINGFOCUS|COMBATBONUSPERCENT|COMBATBONUSSTAT|DAMCHAOS|DAMCOLD|DAMDIRECT|DAMENERGY|DAMFIRE|DAMPHYSICAL|DAMPOISON|EATERCOLD|EATERDAM|EATERENERGY|EATERFIRE|EATERKINETIC|EATERPOISON|ENHANCEPOTIONS|EPHEMERAL|FASTERCASTING|FASTERCASTRECOVERY|HITAREACOLD|HITAREAENERGY|HITAREAFIRE|HITAREAPHYSICAL|HITAREAPOISON|HITCURSE|HITDISPEL|HITFATIGUE|HITFIREBALL|HITHARM|HITLEECHLIFE|HITLEECHMANA|HITLEECHSTAM|HITLIGHTNING|HITLOWERATK|HITLOWERDEF|HITMAGICARROW|HITMANADRAIN|HITSPARKS|HITSPELL|HITSPELLSTR|HITSWARM|IMBUED|INCREASEDAM|INCREASEDEFCHANCE|INCREASEDEFCHANCEMAX|INCREASEGOLD|INCREASEHITCHANCE|INCREASEKARMALOSS|INCREASESPELLDAM|INCREASESWINGSPEED|LOWERAMMOCOST|LOWERMANACOST|LOWERREAGENTCOST|LOWERREQ|LUCK|MAGEARMOR|MASSIVE|NIGHTSIGHT|PRIZED|RAGEFOCUS|REACTIVEPARALYZE|REFLECTPHYSICALDAM|REGENFOOD|REGENHITS|REGENMANA|REGENSTAM|REGENVALFOOD|REGENVALHITS|REGENVALMANA|REGENVALSTAM|RESCOLD|RESCOLDMAX|RESENERGY|RESENERGYMAX|RESFIRE|RESFIREMAX|RESONANCECOLD|RESONANCEENERGY|RESONANCEFIRE|RESONANCEKINETIC|RESONANCEPOISON|RESPHYSICAL|RESPHYSICALMAX|RESPOISON|RESPOISONMAX|SOULCHARGE|SOULCHARGECOLD|SOULCHARGEENERGY|SOULCHARGEFIRE|SOULCHARGEKINETIC|SOULCHARGEPOISON|SPELLCHANNELING|SPELLCONSUMPTION|SPELLFOCUSING|UNWIELDLY)\\b"
-		},
-		"props-cc-itemweapon": {
-			"name": "support.variable.property.props-cc-itemweapon.scp",
-			"match": "(?i)\\b(ASSASSINHONED|BALANCED|BANE|BATTLELUST|BONEBREAKER|BLOODDRINKER|MAGEWEAPON|MYSTICWEAPON|RANGE|RANGEH|RANGEL|SEARINGWEAPON|SPLINTERINGWEAPON|USEBESTWEAPONSKILL|WEAPONSOUNDHIT|WEAPONSOUNDMISS)\\b"
-		},
-		"props-cc-itemweaponranged": {
-			"name": "support.variable.property.props-cc-itemweaponranged.scp",
-			"match": "(?i)\\b(AMMOANIM|AMMOANIMHUE|AMMOANIMRENDERER|AMMOCONT|AMMOSOUNDHIT|AMMOSOUNDMISS|AMMOTYPE)\\b"
-		},
-		"citemstone-functions": {
-			"name": "entity.name.functiony.citemstone.scp",
-			"match": "(?i)\\b(ACCEPTCANDIDATE|ALLGUILDS|ALLMEMBERS|APPLYTOJOIN|CHANGEALIGN|DECLAREFEALTY|DECLAREPEACE|DECLAREWAR|DELHOUSE|DELSHIP|DISMISSMEMBER|ELECTMASTER|GRANTTITLE|INVITEWAR|JOINASMEMBER|MASTERMENU|RECRUIT|REFUSECANDIDATE|RESIGN|RETURNMAINMENU|SETABBREVIATION|SETCHARTER|SETGMTITLE|SETNAME|TOGGLEABBREVIATION|VIEWCANDIDATES|VIEWCHARTER|VIEWENEMYS|VIEWROSTER|VIEWTHREATS)\\b"
-		},
-		"citemstone-props": {
-			"name": "support.variable.property.citemstone.scp",
-			"match": "(?i)\\b(ABBREV|ABBREVIATIONTOGGLE|ADDHOUSE|ADDSHIP|ALIGN|ALIGNTYPE|CHARTER|HOUSES|LOYALTO|MASTER|MASTERGENDERTITLE|MASTERTITLE|MASTERUID|MAXHOUSES|MAXSHIPS|MEMBER|SHIPS|WEBPAGE)\\b"
-		},
-		"cclient-functions": {
-			"name": "entity.name.function.cclient.scp",
-			"match": "(?i)\\b(ADD|ADDBUFF|ADDCONTEXTENTRY|ARROWQUEST|BADSPAWN|BANKSELF|CAST|CHANGEFACE|CHARLIST|CLEARCTAGS|CLOSEPAPERDOLL|CLOSEPROFILE|CLOSESTATUS|CODEXOFWISDOM|CTAGLIST|DYE|EVERBTARG|EXTRACT|FLUSH|GMPAGE|GOTARG|INFO|INFORMATION|LAST|LINK|MAPWAYPOINT|MENU|MIDILIST|NUDGE|NUKE|NUKECHAR|OPENPAPERDOLL|OPENTRADEWINDOW|REMOVEBUFF|REPAIR|RESEND|SAVE|SCROLL|SELF|SENDPACKET|SHOWSKILLS|SKILLMENU|SKILLSELECT|SMSG|SMSGL|SMSGLEX|SMSGU|SUMMON|SYSMESSAGE|SYSMESSAGEF|SYSMESSAGELOC|SYSMESSAGELOCEX|SYSMESSAGEUA|TELE|TILE|UNEXTRACT|VERSION|WEBLINK)\\b"
-		},
-		"cclient-props": {
-			"name": "support.variable.cclient.scp",
-			"match": "(?i)\\b(ALLMOVE|ALLSHOW|CLIENTIS3D|CLIENTISENHANCED|CLIENTISKR|CLIENTVERSION|DEBUG|DETAIL|GM|HEARALL|LASTEVENT|LASTEVENTWALK|PRIVSHOW|REPORTEDCLIVER|SCREENSIZE|TARG|TARGP|TARGPROP|TARGPRV|TARGTXT)\\b"
-		},
-		"clog-functions": {
-			"name": "entity.name.function.builtin.special.scp",
-			"match": "(?i)\\b(LOG)\\b"
-		},
-		"cparty-functions": {
-			"name": "entity.name.function.cparty.scp",
-			"match": "(?i)\\b(ADDMEMBER|ADDMEMBERFORCED|CLEARTAGS|CREATE|DISBAND|MESSAGE|REMOVEMEMBER|SETMASTER|SYSMESSAGE|TAGLIST)\\b"
-		},
-		"cparty-props": {
-			"name": "support.variable.property.cparty.scp",
-			"match": "(?i)\\b(ISSAMEPARTYOF|MEMBERS|SPEECHFILTER|TAG|TAG0|TAGAT|TAGCOUNT)\\b"
-		},
-		"cscriptobj-functions": {
-			"name": "entity.name.function.cscriptobj.scp",
-			"match": "(?i)\\b(ASC|ASCPAD|BCRYPTHASH|BCRYPTVALIDATE|BETWEEN|BETWEEN2|CHR|CLRBIT|DEFLIST|EVAL|EXPLODE|FEVAL|FHVAL|FLOATVAL|FVAL|HVAL|ISBIT|ISEMPTY|ISNUM|LIST|LISTCOL|MD5HASH|MULDIV|NEW|OBJ|RESDEF|RESDEF0|RESOURCEINDEX|RESOURCETYPE|SETBIT|SRC|StrArg|StrEat|StrFirstCap|StrPos|STRRANDRANGE|StrRegexNew|StrReverse|StrSub|StrToken|StrToLower|StrToUpper|StrTrim|SYSCMD|SYSSPAWN|UVAL|VAR|VAR0)\\b"
-		},
-		"cscriptobj-props": {
-			"name": "support.variable.property.cscriptobj.scp",
-			"match": "(?i)\\b(DEFLIST|CATEGORY|DESCRIPTION|SUBSECTION)\\b"
-		},
-		"csector-functions": {
-			"name": "entity.name.function.csector.scp",
-			"match": "(?i)\\b(ALLCHARS|ALLCHARSIDLE|ALLCLIENTS|ALLITEMS|AWAKE|DRY|LIGHT|RAIN|RESPAWN|RESTOCK|SEASON|SLEEP|SNOW)\\b"
-		},
-		"csfileobj-functions": {
-			"name": "entity.name.function.csfileobj.scp",
-			"match": "(?i)\\b(CLOSEOBJECT|FILEEXIST|FILELINES|FILEPATH|INUSE|ISEOF|LENGTH|OPEN|POSITION|READBYTE|READCHAR|READLINE|RESETOBJECT|SEEK|WRITE|WRITECHR|WRITELINE)\\b"
-		},
-		"csfileobj-props": {
-			"name": "support.variable.property.csfileobj.scp",
-			"match": "(?i)\\b(FILEEXIST|FILELINES|FILEPATH|GLOBALTIMEOUT|INUSE|ISEOF|LENGTH|OBJECTPOOL|OPEN|POSITION|READBYTE|READCHAR|READLINE|SEEK|WRITE|WRITECHR|WRITELINE)\\b"
-		},
-		"cstonemember-props": {
-			"name": "support.variable.property.cstonemember.scp",
-			"match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
-		}
-	},
-	"scopeName": "source.scp"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "scp",
+  "fileTypes": ["scp"],
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#sections"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#statements-intrinsic"
+    },
+    {
+      "include": "#object"
+    },
+    {
+      "include": "#storage"
+    },
+    {
+      "include": "#identifier-reserved"
+    },
+    {
+      "include": "#named-constants"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#triggers"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#expressions"
+    }
+  ],
+  "repository": {
+    "string": {
+      "name": "string.quoted.double.scp",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.scp",
+          "match": "\\\\.*"
+        }
+      ]
+    },
+    "identifier-reserved": {
+      "name": "entity.name.reserved.scp",
+      "patterns": [
+        {
+          "name": "support.variable.reserved.local.scp",
+          "match": "(?i)\\b(_for|_while)\\b"
+        },
+        {
+          "name": "support.variable.reserved.tag.scp",
+          "match": "(?i)\\b(barding.diff)\\b"
+        }
+      ]
+    },
+    "comment-block": {
+      "begin": "(?i)^\\s*\\[COMMENT.*\\]",
+      "end": "\\^\\s*[.*\\]",
+      "name": "comment.block.documentation.scp"
+    },
+    "comment-multiline": {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "name": "comment.block.multiline.scp"
+    },
+    "comment-line": {
+      "match": "(//).*$\\n?",
+      "name": "comment.line.scp"
+    },
+    "comment": {
+      "name": "comment.scp",
+      "patterns": [
+        {
+          "include": "#comment-block"
+        },
+        {
+          "include": "#comment-multiline"
+        },
+        {
+          "include": "#comment-line"
+        }
+      ]
+    },
+    "sections": {
+      "name": "entity.name.section.scp",
+      "patterns": [
+        {
+          "name": "support.class.section.header.scp",
+          "begin": "(^\\s*\\[)",
+          "end": "(\\])",
+          "patterns": [
+            {
+              "name": "support.class.section.definition.scp",
+              "match": "(?i)(areadef|book|chardef|defnames|dialog|eof|events|function|itemdef|menu|multidef|newbie|nototitles|obscene|plevel|regionresource|regiontype|resources|roomdef|scrol|spawn|speech|spell|template|tip|typedef)"
+            }
+          ]
+        }
+      ]
+    },
+    "operator": {
+      "name": "keyword.operator.scp",
+      "match": "(~|<|>|<=|>=|\\|&|&&|<<|>>|!|!=|=|==|\\?|\\^|@|%|/|\\*|-|\\+)"
+    },
+    "numeric-literal": {
+      "match": "\\b(\\s*(?<=[^$])((0[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?)))\\b",
+      "name": "constant.numeric.literal.scp"
+    },
+    "expressions": {
+      "name": "expression.scp",
+      "patterns": [
+        {
+          "include": "#operator"
+        },
+        {
+          "include": "#numeric-literal"
+        }
+      ]
+    },
+    "conditional-statement": {
+      "name": "keyword.control.conditional.scp",
+      "match": "(?i)\\b(if|else|elif|elseif|endif)\\b"
+    },
+    "ctrl-flow-statement": {
+      "name": "keyword.control.flow.scp",
+      "match": "(?i)\\b(begin|break|continue|doswitch|end|enddo|endfor|endwhile|for|forchars|forcharlayer|forcharmemorytype|forclients|forcont|forcontid|forconttype|forinstances|foritems|forobjs|forplayers|return|switch|while)\\b"
+    },
+    "parser-modifier": {
+      "name": "keyword.control.parser.scp",
+      "match": "(?i)\\b(fullinterp|try|tryp|trysrc|trysrv)\\b"
+    },
+    "context-changers": {
+      "name": "keyboard.control.context.scp",
+      "patterns": [
+        {
+          "name": "keyword.control.directive.define.context.scp",
+          "match": "(?i)\\b(call|fulltrigger|on|trigger)\\b"
+        }
+      ]
+    },
+    "statements-intrinsic": {
+      "name": "statements.intrinsic.scp",
+      "patterns": [
+        {
+          "include": "#conditional-statement"
+        },
+        {
+          "include": "#ctrl-flow-statement"
+        },
+        {
+          "include": "#parser-modifier"
+        },
+        {
+          "include": "#context-changers"
+        }
+      ]
+    },
+    "trigger-builtin": {
+      "name": "entity.name.function.preprocessor.scp",
+      "match": "(?i)@\\b(ABORT|ADDMULTI|ADDREDCANDLE|ADDOBJ|ADDWHITECANDLE|AFTERCLICK|ATTACK|BUY|CALLGUARDS|CARVECORPSE|CHARATTACK|CHARCLICK|CHARCLIENTTOOLTIP|CHARCLIENTTOOLTIP_AFTERDEFAULT|CHARDCLICK|CHARSHOVE|CHARTRADEACCEPTED|CLICK|CLIENTTOOLTIP|CLIENTTOOLTIP_AFTERDEFAULT|CLIPERIODIC|COMBATADD|COMBATDELETE|COMBATEND|COMBATSTART|CONTEXTMENUREQUEST|CONTEXTMENUSELECT|CREATE|CREATELOOT|CRIMINAL|DAMAGE|DCLICK|DEATH|DEATHCORPSE|DELMULTI|DELOBJ|DESTROY|DISMOUNT|DROPON_CHAR|DROPON_GROUND|DROPON_ITEM|DROPON_SELF|DROPON_TRADE|DYE|EAT|EFFECT|EFFECTADD|EFFECTREMOVE|EFFECTTICK|ENTER|ENVIRONCHANGE|EQUIP|EQUIPTEST|EXIT|EXPCHANGE|EXPLEVELCHANGE|FAIL|FALLING|FAMECHANGE|FOLLOWERSUPDATE|GAIN|GETHIT|HIT|HITCHECK|HITIGNORE|HITMISS|HITPARRY|HITTRY|HOUSEDESIGNBEGIN|HOUSEDESIGNCOMMIT|HOUSEDESIGNCOMMITITEM|HOUSEDESIGNEXIT|ITEMAFTERCLICK|ITEMBUY|ITEMCARVECORPSE|ITEMCLICK|ITEMCLIENTTOOLTIP|ITEMCLIENTTOOLTIP_AFTERDEFAULT|ITEMCONTEXTMENUREQUEST|ITEMCONTEXTMENUSELECT|ITEMCREATE|ITEMDAMAGE|ITEMDCLICK|ITEMDESTROY|ITEMDROPON_CHAR|ITEMDROPON_GROUND|ITEMDROPON_ITEM|ITEMDROPON_SELF|ITEMDROPON_TRADE|ITEMEQUIP|ITEMEQUIPTEST|ITEMFIRE|ITEMMEMORYEQUIP|ITEMPICKUP_GROUND|ITEMPICKUP_PACK|ITEMPICKUP_SELF|ITEMPICKUP_STACK|ITEMSELL|ITEMSMELT|ITEMSPELL|ITEMSTEP|ITEMTARGON_CANCEL|ITEMTARGON_CHAR|ITEMTARGON_GROUND|ITEMTARGON_ITEM|ITEMTIMER|ITEMTOOLTIP|ITEMUNEQUIP|JAILED|KARMACHANGE|KILL|MEMORYEQUIP|LOAD|LOGIN|LOGOUT|MOUNT|MURDERDECAY|MURDERMARK|NOTOSEND|NPCACCEPTITEM|NPCACTCAST|NPCACTFIGHT|NPCACTFOLLOW|NPCACTION|NPCACTWANDER|NPCHEARGREETING|NPCHEARUNKNOWN|NPCLOOKATCHAR|NPCLOOKATITEM|NPCLOSTTELEPORT|NPCREFUSEITEM|NPCRESTOCK|NPCSEENEWPLAYER|NPCSEEWANTITEM|NPCSPECIALACTION|PARTYDISBAND|PARTYINVITE|PARTYLEAVE|PARTYREMOVE|PAYGOLD|PERSONALSPACE|PETDESERT|PICKUP_GROUND|PICKUP_PACK|PICKUP_SELF|PICKUP_STACK|PRESPAWN|PRESTART|PROFILE|RECEIVEITEM|REDEED|REGENSTAT|REGIONENTER|REGIONLEAVE|REGIONRESOURCEFOUND|REGIONRESOURCEGATHER|REGPERIODIC|RENAME|RESOURCEFOUND|RESOURCEGATHER|RESOURCETEST|RESURRECT|SEECRIME|SEEHIDDEN|SEESNOOP|SELECT|SELL|SENDPAPERDOLL|SHIP_MOVE|SHIP_STOP|SHIP_TURN|SKILLABORT|SKILLCHANGE|SKILLFAIL|SKILLGAIN|SKILLMAKEITEM|SKILLMENU|SKILLPRESTART|SKILLSELECT|SKILLSTART|SKILLSTROKE|SKILLSUCCESS|SKILLTARGETCANCEL|SKILLUSEQUICK|SKILLWAIT|SMELT|SPAWN|SPELLBOOK|SPELLCAST|SPELLEFFECT|SPELLEFFECTADD|SPELLEFFECTREMOVE|SPELLEFFECTTICK|SPELLFAIL|SPELLINTERRUPT|SPELLSELECT|SPELLSUCCESS|SPELLTARGETCANCEL|START|STATCHANGE|STEP|STEPSTEALTH|STROKE|SUCCESS|TARGETCANCEL|TARGON_CANCEL|TARGON_CHAR|TARGON_GROUND|TARGON_ITEM|TIMER|TOGGLEFLYING|TOOLTIP|TRADEACCEPTED|TRADECLOSE|TRADECREATE|UNEQUIP|USEQUICK|USERBUGREPORT|USERCHATBUTTON|USEREXTCMD|USEREXWALKLIMIT|USERGUILDBUTTON|USERKRTOOLBAR|USERMAILBAG|USERQUESTARROWCLICK|USERQUESTBUTTON|USERSKILLS|USERSPECIALMOVE|USERSTATS|USERULTIMASTOREBUTTON|USERVIRTUE|USERVIRTUEINVOKE|USERWARMODE|WAIT)\\b"
+    },
+    "triggers": {
+      "name": "entity.name.section.trigger.scp",
+      "patterns": [
+        {
+          "name": "entity.name.section.trigger.builtin",
+          "patterns": [
+            {
+              "include": "#trigger-builtin"
+            }
+          ]
+        }
+      ]
+    },
+    "storage": {
+      "name": "storage.type.scp",
+      "match": "(?i)\\b(d?def0?|defmsg|d?tag0?|d?ctag0?|d?var0?|d?local|float|d?resdef0?|ARGO|ARGS|ARGV|ARG|ARGCHK|ARGCHKID|ARGTXT|d?ARGN[1-3])\\b"
+    },
+    "object": {
+      "name": "entity.name.class.scp",
+      "match": "(?i)\\b(account|act|argo|chardef|client|comp|cont|db|file|findcont|findid|findlayer|findtype|finduid|gmpage|guild|itemdef|lastnew|link|map|member|multi|new|obj|owner|party|ref[1-255]|region|sector|sectors|serv|skill|spell|src|targ|topobj|typedef|town)\\b"
+    },
+    "properties": {
+      "name": "support.variable.property.scp",
+      "patterns": [
+        {
+          "include": "#cobjbase-props"
+        },
+        {
+          "include": "#cchar-props-skills"
+        },
+        {
+          "include": "#cchar-props"
+        },
+        {
+          "include": "#props-cc-char"
+        },
+        {
+          "include": "#ccharbase-props"
+        },
+        {
+          "include": "#ccharplayer-props"
+        },
+        {
+          "include": "#citem-props"
+        },
+        {
+          "include": "#props-cc-itemchar"
+        },
+        {
+          "include": "#props-cc-item"
+        },
+        {
+          "include": "#props-cc-itemequippable"
+        },
+        {
+          "include": "#props-cc-itemweapon"
+        },
+        {
+          "include": "#props-cc-itemweaponranged"
+        },
+        {
+          "include": "#citembase-props"
+        },
+        {
+          "include": "#citemstone-props"
+        },
+        {
+          "include": "#cclient-props"
+        },
+        {
+          "include": "#cparty-props"
+        },
+        {
+          "include": "#csfileobj-props"
+        },
+        {
+          "include": "#cscriptobj-props"
+        }
+      ]
+    },
+    "function-intrinsic": {
+      "name": "entity.name.function.intrinsic.scp",
+      "match": "(?i)\\b(a|asc|b|d|eval|explode|f|floatval|hval|isempty|isnum|isnumber|isvalid|newitem|newnpc|qval|r|rand|s|strarg|strcmp|strcmpi|streat|streverse|strlen|strmatch|strmid|strpos|strregex|strrev|strsub|strtoupper|strtrim|w)\\b"
+    },
+    "function-builtin": {
+      "name": "entity.name.function.builtin.scp",
+      "patterns": [
+        {
+          "include": "#clog-functions"
+        },
+        {
+          "include": "#cobjbase-functions"
+        },
+        {
+          "include": "#cchar-functions"
+        },
+        {
+          "include": "#ccharplayer-functions"
+        },
+        {
+          "include": "#citem-functions"
+        },
+        {
+          "include": "#citemstone-functions"
+        },
+        {
+          "include": "#cclient-functions"
+        },
+        {
+          "include": "#cparty-functions"
+        },
+        {
+          "include": "#cscriptobj-functions"
+        },
+        {
+          "include": "#csector-functions"
+        },
+        {
+          "include": "#csfileobj-functions"
+        },
+        {
+          "include": "#cobjbase-functions"
+        }
+      ]
+    },
+    "functions": {
+      "name": "entity.name.function.scp",
+      "patterns": [
+        {
+          "include": "#function-intrinsic"
+        },
+        {
+          "include": "#function-builtin"
+        }
+      ]
+    },
+    "flags-builtin": {
+      "name": "entity.name.tag.named_constant.flag.builtin.scp",
+      "patterns": [
+        {
+          "include": "#cobjbase-constants-spellflags"
+        },
+        {
+          "include": "#cchar-constants-statflags"
+        }
+      ]
+    },
+    "named-constants": {
+      "name": "entity.name.tag.named_constant.scp",
+      "patterns": [
+        {
+          "include": "#flags-builtin"
+        }
+      ]
+    },
+    "cobjbase-constants-spellflags": {
+      "name": "constant.numeric.flag.spellflag.cobjbase.scp",
+      "match": "(?i)\\b(spellflag_dir_anim|spellflag_targ_item|spellflag_targ_char|spellflag_targ_obj|spellflag_targ_xyz|spellflag_harm|spellflag_fx_bolt|spellflag_fx_targ|spellflag_field|spellflag_summon|spellflag_good|spellflag_resist|spellflag_targ_noself|spellflag_freezeoncast|spellflag_disabled|spellflag_scripted|spellflag_playeronly|spellflag_nounparalyze|spellflag_no_castanim|spellflag_targ_no_player|spellflag_targ_no_npc|spellflag_noprecast|spellflag_nofreezeoncast|spellflag_area|spellflag_poly|spellflag_targ_dead|spellflag_damage|spellflag_bless|spellflag_curse|spellflag_heal|spellflag_tick)\\b"
+    },
+    "cobjbase-functions": {
+      "name": "entity.name.function.cobjbase.scp",
+      "match": "(?i)\\b(ADDCLILOC|BASEPROPLIST|BASETAGLIST|CLICK|CLILOCLIST|DAMAGE|DCLICK|DIALOG|DIALOGCLOSE|EDIT|EFFECT|EFFECTLOCATION|EMOTE|FIX|FLIP|GOAWAKE|GOSLEEP|INFO|INPDLG|MENU|MESSAGE|MESSAGEUA|MOVE|MOVENEAR|MOVETO|MSG|NUDGEDOWN|NUDGEUP|P|PROMPTCONSOLE|PROMPTCONSOLEU|PROPLIST|REMOVE|REMOVECLILOC|REMOVEFROMVIEW|REPLACECLILOC|RESENDTOOLTIP|SAY|SAYU|SAYUA|SDIALOG|SPELLEFFECT|TAGLIST|TARGET|TIMERF|TIMERFMS|UID|UPDATE|UPDATEX|USEITEM|Z)\\b"
+    },
+    "cobjbase-props": {
+      "name": "support.variable.property.cobjbase.scp",
+      "match": "(?i)\\b(ABILITYPRIMARY|ABILITYSECONDARY|ARMOR|CAN|CANMASK|CANSEE|CANSEELOS|CANSEELOSFLAG|CLILOC|CLILOCCOUNT|COLOR|COMPLEXITY|CTAGCOUNT|DAM|DEFNAME|DIALOGLIST|DISTANCE|EVENTS|FACING|HASCOMPONENTPROPS|ISARMOR|ISCHAR|ISCONT|ISDIALOGOPEN|ISEVENT|ISITEM|ISNEARTYPE|ISNEARTYPETOP|ISPLAYER|ISSLEEPING|ISTEVENT|ISTIMERF|ISWEAPON|MAP|MODAC|MODAR|MODMAXWEIGHT|NAME|NAMELOC|ONAME|P|PROPSAT|PROPSCOUNT|RECIPEALCHEMY|RECIPEBLACKSMITH|RECIPEBOWCRAFT|RECIPECARPENTRY|RECIPECARTOPGRAHY|RECIPECOOKING|RECIPEGLASSBLOWING|RECIPEINSCRIPTION|RECIPEMASONRY|RECIPETAILORING|RECIPETINKERING|RESDISPDNHUE|SERIAL|SEXTANTP|SLAYER|SLAYERLESSER|SLAYERMISC|SLAYERSUPER|SOUND|SPAWNITEM|SPEED|TAG|TAG0|TAGAT|TAGCOUNT|TEVENTS|TEXTF|TIMER|TIMERD|TIMERMS|TIMESTAMP|TOPOBJ|UID|VERSION|WEIGHT|Z)\\b"
+    },
+    "ccharbase-props": {
+      "name": "support.variable.property.ccharbase.scp",
+      "match": "(?i)\\b(ACTPRI|BONDED|FOLLOWERSLOTS|HOMEDIST|ICON|ITEM|MOVERATE|NEED|NEEDNAME|NPC|SPEECH|SPELLADD|THROWDAM|THROWDAMTYPE|THROWOBJ|THROWRANGE|VENDCAP|VENDGOLD)\\b"
+    },
+    "cchar-functions": {
+      "name": "entity.name.function.cchar.scp",
+      "match": "(?i)\\b(AFK|ALLSKILLS|ANIM|ATTACK|BANK|BARK|BOUNCE|BOW|CONSUME|CONTROL|CRIMINAL|CURE|DESTROY|DISCONNECT|DROP|DUPE|EQUIP|EQUIPARMOR|EQUIPHALO|EQUIPWEAPON|FACE|FIXWEIGHT|FORGIVE|GO|GOCHAR|GOCHARID|GOCLI|GOITEMID|GONAME|GOSOCK|GOTYPE|GOUID|HEAR|HUNGRY|INVIS|INVUL|JAIL|KILL|MAKEITEM|MOUNT|NEWBIESKILL|NEWGOLD|NEWLOOT|NOTOCLEAR|NOTOUPDATE|OWNER|PACK|POISON|POLY|PRIVSET|REMOVE|RESURRECT|REVEAL|SALUTE|SKILL|SKILLGAIN|SLEEP|SMSG|SMSGL|SMSGLEX|SMSGU|SUICIDE|SUMMONCAGE|SUMMONTO|SYSMESSAGE|SYSMESSAGEF|SYSMESSAGELOC|SYSMESSAGELOCEX|SYSMESSAGEUA|TARGETCLOSE|UNDERWEAR|UNEQUIP|WAKE|WHERE)\\b"
+    },
+    "cchar-props-skills": {
+      "name": "support.variable.skill.cchar.scp",
+      "match": "(?i)\\b(Alchemy|Archery|Anatomy|AnimalLore|ArmsLore|Begging|Blacksmithing|Bowcraft|Bushido|Camping|Carpentry|Cartography|Chivalry|Cooking|DetectingHidden|Enticement|EvaluatingIntel|Fencing|Fishing|Focus|Forensics|Healing|Herding|Hiding|Imbuing|Inscription|ItemId|LockPicking|Lumberjacking|Macefighting|Magery|MagicResistance|Musicianship|Meditation|Mining|Mysticism|Necromancy|Ninjitsu|Parrying|Peacemaking|Poisoning|Provocation|RemoveTrap|Snooping|Spellweaving|SpiritSpeak|Stealing|Stealth|Swordsmanship|Tactics|Tailoring|Taming|TasteId|Throwing|Tinkering|Tracking|Veterinary|Wrestling)\\b"
+    },
+    "cchar-constants-statflags": {
+      "name": "constant.numeric.flag.statflag.cchar.scp",
+      "match": "(?i)\\b(statf_invul|statf_dead|statf_freeze|statf_invisible|statf_sleeping|statf_war|statf_reactive|statf_poisoned|statf_nightsight|statf_reflection|statf_polymorph|statf_incognito|statf_spiritspeak|statf_insubstantial|statf_emoteaction|statf_commcrystal|statf_hasshield|statf_archercanmove|statf_stone|statf_hovering|statf_fly|statf_hallucinating|statf_hidden|statf_indoors|statf_criminal|statf_conjured|statf_pet|statf_spawned|statf_saveparity|statf_ridden|statf_onhorse)\\b"
+    },
+    "cchar-props": {
+      "name": "support.variable.property.cchar.scp",
+      "match": "(?i)\\b(AC|ACCOUNT|ACT|ACTARG[1-3]|ACTDIFF|ACTION(?:EFFECT)?|ACTP|ACTPRV|AGE|AR|ATTACKER|AVERSIONS|BANKBALANCE|BLOODCOLOR|BODY|BREATH|CAN(?:CAST|MAKE(?:SKILL)?)|CANMOVE|CREATE|CURFOLLOWER|DAMADJUSTED|DESIRES|DEX|DIR|DISMOUNT|DISPIDDEC|EMOTE(?:ACT|COLOROVERRIDE)|EXP|FAME|FIGHTRANGE|FLAGS|FONT|FOOD|GOLD|GUILDABBREV|HEIGHT|HITPOINTS|HITS|HOME|ID|INT|ISGM|ISINPARTY|ISMYPET|ISONLINE|ISSTUCK|ISVENDOR|ISVERTICALSPACE|KARMA|LEVEL|MANA|MAXFOLLOWER|MAXFOOD|MAXHITS|MAXMANA|MAXSTAM|MAXWEIGHT|MEMORY|MOD(?:DEX|INT|MAXHITS|MAXMANA|MAXSTAM|STR)|MOUNT|MOVE|NAME|NOTO(?:GETFLAG|SAVE)|NPC|O(?:BODY|DEX|FAME|FOOD|INT|KARMA|MAXHITS|MAXMANA|MAXSTAM|SKIN|STR)|P|RANGE(?:[HL])?|REGEN(?:FOOD[D]?|HITS[D]?|MANA[D]?|STAM[D]?|VALFOOD|VALHITS|VALMANA|VALSTAM)|SEX|SKILL(?:ADJUSTED|BEST|CHECK|TEST|TOTAL|USEQUICK)|SPEECHCOLOROVERRIDE|SPELLTIMEOUT|STAM(?:INA)?|STATPERCENT|STEPSTEALTH|STONE|STR|SWING|TITHING|TITLE|TOWNABBREV|VIRTUALGOLD|VISUALRANGE)\\b"
+    },
+    "props-cc-char": {
+      "name": "support.variable.property.cc-char.scp",
+      "match": "(?i)\\b(COMBATBONUSPERCENT|COMBATBONUSSTAT|DAMCHAOS|DAMCOLD|DAMDIRECT|DAMENERGY|DAMFIRE|DAMPHYSICAL|DAMPOISON|DECREASEHITCHANCE|EATERCOLD|EATERDAM|EATERENERGY|EATERFIRE|EATERKINETIC|EATERPOISON|ENHANCEPOTIONS|FASTERCASTING|FASTERCASTRECOVERY|FOODTYPE|HITAREACOLD|HITAREAENERGY|HITAREAFIRE|HITAREAPHYSICAL|HITAREAPOISON|HITCURSE|HITDISPEL|HITFATIGUE|HITFIREBALL|HITHARM|HITLEECHLIFE|HITLEECHMANA|HITLEECHSTAM|HITLIGHTNING|HITLOWERATK|HITLOWERDEF|HITMAGICARROW|HITMANADRAIN|HITSPARKS|HITSPELL|HITSPELLSTR|HITSWARM|INCREASEDAM|INCREASEDEFCHANCE|INCREASEDEFCHANCEMAX|INCREASEGOLD|INCREASEHITCHANCE|INCREASEKARMALOSS|INCREASESPELLDAM|INCREASESWINGSPEED|LOWERAMMOCOST|LOWERMANACOST|LOWERREAGENTCOST|LUCK|NIGHTSIGHT|RAGEFOCUS|REACTIVEPARALYZE|REFLECTPHYSICALDAM|RESCOLD|RESCOLDMAX|RESENERGY|RESENERGYMAX|RESFIRE|RESFIREMAX|RESONANCECOLD|RESONANCEENERGY|RESONANCEFIRE|RESONANCEKINETIC|RESONANCEPOISON|RESPHYSICAL|RESPHYSICALMAX|RESPOISON|RESPOISONMAX|SOULCHARGE|SOULCHARGECOLD|SOULCHARGEENERGY|SOULCHARGEFIRE|SOULCHARGEKINETIC|SOULCHARGEPOISON|SPELLCHANNELING|SPELLCONSUMPTION|SPELLFOCUSING)\\b"
+    },
+    "ccharplayer-functions": {
+      "name": "entity.name.function.ccharplayer.scp",
+      "match": "(?i)\\b(KICK|PASSWORD|TARGETCLOSE)\\b"
+    },
+    "ccharplayer-props": {
+      "name": "support.variable.property.ccharplayer.scp",
+      "match": "(?i)\\b(ACCOUNT|ADDHOUSE|ADDSHIP|DEATHS|DELHOUSE|DELSHIP|DSPEECH|EMOTECOLOR|GETHOUSEPOS|GETSHIPPOS|HOUSEMULTICOUNT|HOUSES|ISDSPEECH|KILLS|KRTOOLBARSTATUS|LASTDISCONNECTED|LASTUSED|LIGHT|MAXHOUSES|MAXSHIPS|PFLAG|PROFILE|REFUSETRADES|SHIPMULTICOUNT|SHIPS|SKILLCLASS|SKILLLOCK|SPEECHCOLOR|SPEEDMODE|STATLOCK)\\b"
+    },
+    "citembase-props": {
+      "name": "support.variable.property.citembase.scp",
+      "match": "(?i)\\b(ALTERITEM|BONUSCRAFTING|BONUSCRAFTINGAMT|BONUSCRAFTINGEXCEP|BONUSCRAFTINGEXCEPAMT|BONUSSKILL1|BONUSSKILL1AMT|BONUSSKILL2|BONUSSKILL2AMT|BONUSSKILL3|BONUSSKILL3AMT|BONUSSKILL4|BONUSSKILL4AMT|BONUSSKILL5|BONUSSKILL5AMT|CANUSE|CHARGESCUR|CHARGESMAX|DISPID|DROPSOUND|DUPEITEM|DUPELIST|DURABILITY|DYE|ENCHANT|EQUIPSOUND|EXCEPTIONAL|EXPANSION|FLIP|ID|IMBUE|ISARMOR|ISWEAPON|ITEMSETAMTCUR|ITEMSETAMTMAX|ITEMSETCOLOR|ITEMSETNAME|LAYER|LIFESPAN|MAKERSMARK|MATERIAL|MAXAMOUNT|MULTICOUNT|NODROPTRADE|NPCKILLER|NPCKILLERAMT|NPCPROTECTION|NPCPROTECTIONAMT|OCOLOR|OWNEDBY|PICKUPSOUND|PILE|RARITY|RECHARGE|RECHARGEAMT|RECHARGERATE|RECYCLE|REFORGE|REMOVALTYPE|REPAIR|REPLICATE|REQSTR|RESDISPDNID|RESMAKE|RETAINCOLOR|RESOURCES|SELFREPAIR|SHIPSPEED|SKILL|SKILLMAKE|SPEED|SPEEDMODE|SUMMONING|TDATA1|TDATA2|TDATA3|TDATA4|TFLAGS|TWOHANDS|TYPE|USESCUR|USESMAX|VALUE|WEIGHT)\\b"
+    },
+    "citem-functions": {
+      "name": "entity.name.function.citem.scp",
+      "match": "(?i)\\b(BOUNCE|CONSUME|CONTCONSUME|DECAY|DESTROY|DROP|DUPE|EQUIP|REPAIR|SMELT|UNEQUIP|USE|USEDOOR)\\b"
+    },
+    "citem-props": {
+      "name": "support.variable.property.citem.scp",
+      "match": "(?i)\\b(AC|ADDCIRCLE|ADDSPELL|AMOUNT|AR|ATTR|BASEWEIGHT|BONUSCRAFTING|BONUSCRAFTINGAMT|BONUSCRAFTINGEXCEP|BONUSCRAFTINGEXCEPAMT|BONUSSKILL1|BONUSSKILL1AMT|BONUSSKILL2|BONUSSKILL2AMT|BONUSSKILL3|BONUSSKILL3AMT|BONUSSKILL4|BONUSSKILL4AMT|BONUSSKILL5|BONUSSKILL5AMT|CANUSE|CONT|CONTGRID|CONTP|CRAFTEDBY|DISPID|DISPIDDEC|DOORCLOSESOUND|DOOROPENID|DOOROPENSOUND|DROPSOUND|DUPEITEM|DURABILITY|DYE|EQUIPSOUND|FRUIT|HEIGHT|HITPOINTS|HITS|ID|ITEMSETAMTCUR|ITEMSETAMTMAX|ITEMSETCOLOR|ITEMSETNAME|LAYER|LIFESPAN|LINK|LUCK|MAKERSNAME|MATERIAL|MAXAMOUNT|MAXHITS|MORE|MORE1|MORE1H|MORE1L|MORE2|MORE2H|MORE2L|MOREM|MOREP|MOREX|MOREY|MOREZ|NODROP|NOTRADE|NPCKILLER|NPCKILLERAMT|NPCPROTECTION|NPCPROTECTIONAMT|OCOLOR|OWNEDBY|P|PICKUPSOUND|PORTCULISSOUND|QUESTITEM|RARITY|RECHARGE|RECHARGEAMT|RECHARGERATE|REMOVALTYPE|REPAIRPERCENT|SELFREPAIR|SPELLCOUNT|SUMMONING|TOPCONT|TYPE|USESCUR|USESMAX|WEIGHT)\\b"
+    },
+    "props-cc-itemchar": {
+      "name": "support.variable.property.citem-cc.scp",
+      "match": "(?i)\\b(WEIGHTREDUCTION)\\b"
+    },
+    "props-cc-item": {
+      "name": "support.variable.property.cc-item.scp",
+      "match": "(?i)\\b(LAVAINFUSED|SHIPWRECKITEM|UNLUCKY)\\b"
+    },
+    "props-cc-itemequippable": {
+      "name": "support.variable.property.props-cc-itemequippable.scp",
+      "match": "(?i)\\b(ALTERED|ANTIQUE|BONUSBERSERK|BONUSDEX|BONUSDURABILITY|BONUSHITSMAX|BONUSINT|BONUSMANAMAX|BONUSSTAMMAX|BONUSSTR|BRITTLE|CASTINGFOCUS|COMBATBONUSPERCENT|COMBATBONUSSTAT|DAMCHAOS|DAMCOLD|DAMDIRECT|DAMENERGY|DAMFIRE|DAMPHYSICAL|DAMPOISON|EATERCOLD|EATERDAM|EATERENERGY|EATERFIRE|EATERKINETIC|EATERPOISON|ENHANCEPOTIONS|EPHEMERAL|FASTERCASTING|FASTERCASTRECOVERY|HITAREACOLD|HITAREAENERGY|HITAREAFIRE|HITAREAPHYSICAL|HITAREAPOISON|HITCURSE|HITDISPEL|HITFATIGUE|HITFIREBALL|HITHARM|HITLEECHLIFE|HITLEECHMANA|HITLEECHSTAM|HITLIGHTNING|HITLOWERATK|HITLOWERDEF|HITMAGICARROW|HITMANADRAIN|HITSPARKS|HITSPELL|HITSPELLSTR|HITSWARM|IMBUED|INCREASEDAM|INCREASEDEFCHANCE|INCREASEDEFCHANCEMAX|INCREASEGOLD|INCREASEHITCHANCE|INCREASEKARMALOSS|INCREASESPELLDAM|INCREASESWINGSPEED|LOWERAMMOCOST|LOWERMANACOST|LOWERREAGENTCOST|LOWERREQ|LUCK|MAGEARMOR|MASSIVE|NIGHTSIGHT|PRIZED|RAGEFOCUS|REACTIVEPARALYZE|REFLECTPHYSICALDAM|REGENFOOD|REGENHITS|REGENMANA|REGENSTAM|REGENVALFOOD|REGENVALHITS|REGENVALMANA|REGENVALSTAM|RESCOLD|RESCOLDMAX|RESENERGY|RESENERGYMAX|RESFIRE|RESFIREMAX|RESONANCECOLD|RESONANCEENERGY|RESONANCEFIRE|RESONANCEKINETIC|RESONANCEPOISON|RESPHYSICAL|RESPHYSICALMAX|RESPOISON|RESPOISONMAX|SOULCHARGE|SOULCHARGECOLD|SOULCHARGEENERGY|SOULCHARGEFIRE|SOULCHARGEKINETIC|SOULCHARGEPOISON|SPELLCHANNELING|SPELLCONSUMPTION|SPELLFOCUSING|UNWIELDLY)\\b"
+    },
+    "props-cc-itemweapon": {
+      "name": "support.variable.property.props-cc-itemweapon.scp",
+      "match": "(?i)\\b(ASSASSINHONED|BALANCED|BANE|BATTLELUST|BONEBREAKER|BLOODDRINKER|MAGEWEAPON|MYSTICWEAPON|RANGE|RANGEH|RANGEL|SEARINGWEAPON|SPLINTERINGWEAPON|USEBESTWEAPONSKILL|WEAPONSOUNDHIT|WEAPONSOUNDMISS)\\b"
+    },
+    "props-cc-itemweaponranged": {
+      "name": "support.variable.property.props-cc-itemweaponranged.scp",
+      "match": "(?i)\\b(AMMOANIM|AMMOANIMHUE|AMMOANIMRENDERER|AMMOCONT|AMMOSOUNDHIT|AMMOSOUNDMISS|AMMOTYPE)\\b"
+    },
+    "citemstone-functions": {
+      "name": "entity.name.functiony.citemstone.scp",
+      "match": "(?i)\\b(ACCEPTCANDIDATE|ALLGUILDS|ALLMEMBERS|APPLYTOJOIN|CHANGEALIGN|DECLAREFEALTY|DECLAREPEACE|DECLAREWAR|DELHOUSE|DELSHIP|DISMISSMEMBER|ELECTMASTER|GRANTTITLE|INVITEWAR|JOINASMEMBER|MASTERMENU|RECRUIT|REFUSECANDIDATE|RESIGN|RETURNMAINMENU|SETABBREVIATION|SETCHARTER|SETGMTITLE|SETNAME|TOGGLEABBREVIATION|VIEWCANDIDATES|VIEWCHARTER|VIEWENEMYS|VIEWROSTER|VIEWTHREATS)\\b"
+    },
+    "citemstone-props": {
+      "name": "support.variable.property.citemstone.scp",
+      "match": "(?i)\\b(ABBREV|ABBREVIATIONTOGGLE|ADDHOUSE|ADDSHIP|ALIGN|ALIGNTYPE|CHARTER|HOUSES|LOYALTO|MASTER|MASTERGENDERTITLE|MASTERTITLE|MASTERUID|MAXHOUSES|MAXSHIPS|MEMBER|SHIPS|WEBPAGE)\\b"
+    },
+    "cclient-functions": {
+      "name": "entity.name.function.cclient.scp",
+      "match": "(?i)\\b(ADD|ADDBUFF|ADDCONTEXTENTRY|ARROWQUEST|BADSPAWN|BANKSELF|CAST|CHANGEFACE|CHARLIST|CLEARCTAGS|CLOSEPAPERDOLL|CLOSEPROFILE|CLOSESTATUS|CODEXOFWISDOM|CTAGLIST|DYE|EVERBTARG|EXTRACT|FLUSH|GMPAGE|GOTARG|INFO|INFORMATION|LAST|LINK|MAPWAYPOINT|MENU|MIDILIST|NUDGE|NUKE|NUKECHAR|OPENPAPERDOLL|OPENTRADEWINDOW|REMOVEBUFF|REPAIR|RESEND|SAVE|SCROLL|SELF|SENDPACKET|SHOWSKILLS|SKILLMENU|SKILLSELECT|SMSG|SMSGL|SMSGLEX|SMSGU|SUMMON|SYSMESSAGE|SYSMESSAGEF|SYSMESSAGELOC|SYSMESSAGELOCEX|SYSMESSAGEUA|TELE|TILE|UNEXTRACT|VERSION|WEBLINK)\\b"
+    },
+    "cclient-props": {
+      "name": "support.variable.cclient.scp",
+      "match": "(?i)\\b(ALLMOVE|ALLSHOW|CLIENTIS3D|CLIENTISENHANCED|CLIENTISKR|CLIENTVERSION|DEBUG|DETAIL|GM|HEARALL|LASTEVENT|LASTEVENTWALK|PRIVSHOW|REPORTEDCLIVER|SCREENSIZE|TARG|TARGP|TARGPROP|TARGPRV|TARGTXT)\\b"
+    },
+    "clog-functions": {
+      "name": "entity.name.function.builtin.special.scp",
+      "match": "(?i)\\b(LOG)\\b"
+    },
+    "cparty-functions": {
+      "name": "entity.name.function.cparty.scp",
+      "match": "(?i)\\b(ADDMEMBER|ADDMEMBERFORCED|CLEARTAGS|CREATE|DISBAND|MESSAGE|REMOVEMEMBER|SETMASTER|SYSMESSAGE|TAGLIST)\\b"
+    },
+    "cparty-props": {
+      "name": "support.variable.property.cparty.scp",
+      "match": "(?i)\\b(ISSAMEPARTYOF|MEMBERS|SPEECHFILTER|TAG|TAG0|TAGAT|TAGCOUNT)\\b"
+    },
+    "cscriptobj-functions": {
+      "name": "entity.name.function.cscriptobj.scp",
+      "match": "(?i)\\b(ASC|ASCPAD|BCRYPTHASH|BCRYPTVALIDATE|BETWEEN|BETWEEN2|CHR|CLRBIT|DEFLIST|EVAL|EXPLODE|FEVAL|FHVAL|FLOATVAL|FVAL|HVAL|ISBIT|ISEMPTY|ISNUM|LIST|LISTCOL|MD5HASH|MULDIV|NEW|OBJ|RESDEF|RESDEF0|RESOURCEINDEX|RESOURCETYPE|SETBIT|SRC|StrArg|StrEat|StrFirstCap|StrPos|STRRANDRANGE|StrRegexNew|StrReverse|StrSub|StrToken|StrToLower|StrToUpper|StrTrim|SYSCMD|SYSSPAWN|UVAL|VAR|VAR0)\\b"
+    },
+    "cscriptobj-props": {
+      "name": "support.variable.property.cscriptobj.scp",
+      "match": "(?i)\\b(DEFLIST|CATEGORY|DESCRIPTION|SUBSECTION)\\b"
+    },
+    "csector-functions": {
+      "name": "entity.name.function.csector.scp",
+      "match": "(?i)\\b(ALLCHARS|ALLCHARSIDLE|ALLCLIENTS|ALLITEMS|AWAKE|DRY|LIGHT|RAIN|RESPAWN|RESTOCK|SEASON|SLEEP|SNOW)\\b"
+    },
+    "csfileobj-functions": {
+      "name": "entity.name.function.csfileobj.scp",
+      "match": "(?i)\\b(CLOSEOBJECT|FILEEXIST|FILELINES|FILEPATH|INUSE|ISEOF|LENGTH|OPEN|POSITION|READBYTE|READCHAR|READLINE|RESETOBJECT|SEEK|WRITE|WRITECHR|WRITELINE)\\b"
+    },
+    "csfileobj-props": {
+      "name": "support.variable.property.csfileobj.scp",
+      "match": "(?i)\\b(FILEEXIST|FILELINES|FILEPATH|GLOBALTIMEOUT|INUSE|ISEOF|LENGTH|OBJECTPOOL|OPEN|POSITION|READBYTE|READCHAR|READLINE|SEEK|WRITE|WRITECHR|WRITELINE)\\b"
+    },
+    "cstonemember-props": {
+      "name": "support.variable.property.cstonemember.scp",
+      "match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
+    }
+  },
+  "scopeName": "source.scp"
 }
