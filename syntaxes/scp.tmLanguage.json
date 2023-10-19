@@ -292,6 +292,9 @@
         },
         {
           "include": "#cobjbase-functions"
+        },
+        {
+          "include": "#bbdd-functions"
         }
       ]
     },
@@ -452,6 +455,10 @@
     "cstonemember-props": {
       "name": "support.variable.property.cstonemember.scp",
       "match": "(?i)\\b(ACCOUNTGOLD|GUILDTITLE|ISALLY|ISCANDIDATE|ISENEMY|ISMASTER|ISMEMBER|LOYALTO|PRIV|PRIVNAME|SHOWABBREV|THEYALLIANCE|THEYWAR|WEALLIANCE|WEWAR)\\b"
+    },
+    "bbdd-functions": {
+      "name": "entity.name.function.bbdd.scp",
+      "match": "(?i)\\b(AEXECUTE|AQUERY|CLOSE|CONNECT|CONNECTED|ESCAPEDATA|EXECUTE|QUERY|NUMCOLS|NUMROWS|NUMROWS|ROW)\\b"
     }
   },
   "scopeName": "source.scp"
