@@ -1,7 +1,7 @@
 # DOCS:
 #   https://snyk.io/blog/vs-code-extension-building-auto-cicd-with-github-actions/
 #   https://code.visualstudio.com/api/working-with-extensions/continuous-integration#github-actions
-#   https://github.com/jeff-hykin/better-cpp-syntax
+#   https://github.com/dustypomerleau/rust-syntax
 
 on:
   push:
@@ -30,19 +30,13 @@ jobs:
         uses: actions/setup-node@v1
         #with:
         #  node-version: 10.x
-      #- name: Install dependencies
-      #  run: npm install
       #- name: Run headless test (Mocha)
         #uses: GabrielBB/xvfb-action@v1.0
         #with:
         #  run: |
         #    npm test
-      - name: Run headless test 1 (Basic)
-        run: npm ci
-      - name: Run headless test 2 (Validate grammar)
+      - name: Validate grammar
         # Test once the grammar. FIXME: we need SCP code examples!
         run: |
-          export CI_NIX_FOLDER="$PWD"
-          chmod +x .ci-commands/project/test.sh
-          .ci-commands/project/test.sh
+          npx vscode-tmgrammar-test@0.0.11 -s source.scp -g syntaxes/scp.tmLanguage.json -t "test/**/*.scp"
         if: runner.os == 'Linux'

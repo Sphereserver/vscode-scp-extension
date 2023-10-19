@@ -1,0 +1,52 @@
+// SYNTAX TEST "source.scp" "Textmate grammar scope tests"
+// https://github.com/dustypomerleau/rust-syntax/blob/main/test/test.rs
+
+// This file is a placeholder stub that will gradually be expanded to unit test all scopes.
+// Instructions for writing Textmate grammar tests can be found at:
+// https://github.com/PanAeon/vscode-tmgrammar-test/blob/master/README.md
+
+[CHARDEF 01]
+DEFNAME=c_ogre
+NAME=#NAMES_OGRE the Ogre
+SOUND=427
+ICON=i_pet_ogre
+CAN=mt_walk|mt_usehands
+
+DAM=9,11
+ARMOR=32
+HEIGHT=28
+
+RESOURCES=2 i_ribs_raw
+FOODTYPE=15 t_meat_raw
+DESIRES=c_ogre, t_arock
+AVERSIONS=t_TRAP,r_civilization
+
+CATEGORY=Monsters
+SUBSECTION=Giants
+DESCRIPTION=Ogre
+
+ON=@Create
+     NPC=brain_monster
+
+     FAME=3000
+     KARMA=-3000
+
+     STR={166, 195}
+     DEX={46, 65}
+     INT={46, 70}
+     MAXHITS={100, 117}
+     
+     RESPHYSICAL={30, 35}
+     RESFIRE={15, 25}
+     RESCOLD={15, 25}
+     RESPOISON={15, 25}
+     RESENERGY=25
+
+     MAGICRESISTANCE={55.1, 70.0}
+     TACTICS={60.1, 70.0}
+     WRESTLING={70.1, 80.0}
+
+ON=@CreateLoot
+     ITEM=i_gold,{125 172}
+     ITEM=i_club
+     ITEM=i_treasure_map1,R99
