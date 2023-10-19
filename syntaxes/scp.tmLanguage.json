@@ -134,7 +134,7 @@
     },
     "ctrl-flow-statement": {
       "name": "keyword.control.flow.scp",
-      "match": "(?i)\\b(begin|break|continue|doswitch|end|enddo|endfor|endwhile|for|forchars|forcharlayer|forcharmemorytype|forclients|forcont|forcontid|forconttype|forinstances|foritems|forobjs|forplayers|return|switch|while)\\b"
+      "match": "(?i)\\b(begin|break|continue|dorand|doswitch|end|enddo|endfor|endwhile|for|forchars|forcharlayer|forcharmemorytype|forclients|forcont|forcontid|forconttype|forinstances|foritems|forobjs|forplayers|return|switch|while)\\b"
     },
     "parser-modifier": {
       "name": "keyword.control.parser.scp",
