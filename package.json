@@ -2,6 +2,7 @@
   "name": "scp-spherex",
   "displayName": "SphereScript for SphereServer-X",
   "description": "Syntax highlighting for SphereServer-X script files",
+  "publisher": "sphereserver-uo",
   "version": "1.0.1",
   "license": "MIT",
   "icon": "images/icon.png",
