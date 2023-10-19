@@ -1,4 +1,6 @@
 # SphereScript (for SphereServer-X) Visual Studio Code Extension
 
-* Work in progress. At the moment the syntax highlighting is pretty good but the extension doesn't feel complete yet, so it's not available in the VSCode store.
+Get it on the <a href="https://marketplace.visualstudio.com/items?itemName=sphereserver-uo.scp-spherex">Marketplace!</a>
+
+* Official plugin for the SphereScript scripting language for SphereServer. Consider it as still in development.
 * Would like to contribute? See CONTRIBUTING.md and check GitHub issues for feature requests and issues!
