@@ -1,9 +1,9 @@
 {
   "name": "scp-spherex",
   "displayName": "SphereScript for SphereServer-X",
-  "description": "Syntax highlighting for SphereServer-X script files",
+  "description": "Syntax highlighting for SphereServer-X script files (scp)",
   "publisher": "sphereserver-uo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
@@ -22,6 +22,7 @@
         "id": "scp",
         "aliases": [
           "SphereScript",
+          "SphereScript-X",
           "scp"
         ],
         "extensions": [
